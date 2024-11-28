@@ -1,0 +1,48 @@
+{% extends "header_app.html" %}
+{% block loginSeller %}
+
+{% if request.session.seller_id %}
+<!-- If the user is authenticated, show a Logout button -->
+ <form action="{% url 'logout_seller' %}" method="post">
+  {% csrf_token %}
+<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
+<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
+</form>
+{% else %}
+<!-- If the user is not authenticated, show Login and Registration buttons -->
+<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
+<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
+{% endif %}
+
+
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4">Welcome to Electronics Seller Page</h1>
+<div class="d-grid gap-2 d-flex justify-content-end mx-5">
+  <a class="btn btn-primary mb-3 " href="{% url 'item_add_view' %}">Add New Item</a>
+</div>
+
+<div class="container row gap-3 mx-5">
+   {% for item in products %}
+   <div class="card" style="width: 18rem;">
+    <img src="{{ item.product_photo.url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h6 class="card-title">Product Name: {{item.name}}</h6>
+      <p class="card-text">Product Price: {{item.price}}</p>
+      <p class="card-text">Brands: {{item.brand}}</p>
+      <p class="card-text">Condition: {{item.condition}}</p>
+      <p class="card-text">Battery life: {{item.battery_life}}</p>
+      <p class="card-text">Display type: {{item.display_type}}</p>
+      <p class="card-text">Storage: {{item.storage}}</p>
+      <p class="card-text">Processor: {{item.processor}}</p>
+      <p class="card-text">Memory: {{item.memory}}</p>
+      <p class="card-text">Operating System: {{item.operating_system}}</p>
+      <p class="card-text">Delivery: {{item.delivery}}</p>
+      <a href="{% url 'item_delete_view' item.id %}" class="btn btn-danger">Delete</a>
+    </div>
+  </div>
+   {% endfor %}
+</div>
+{% endblock %}
+price', 'brand', 'brand', 'battery_life', 'display_type', 'storage', 'processor', 'memory', 'operating_system',

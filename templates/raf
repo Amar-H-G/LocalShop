@@ -1,0 +1,3 @@
+{% url 'Index'%}
+
+{% url 'login_seller' %}

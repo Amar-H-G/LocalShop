@@ -1,0 +1,37 @@
+{% extends "header_app.html" %}
+
+{% block loginSeller %}
+
+{% if request.session.seller_id %}
+<!-- If the user is authenticated, show a Logout button -->
+ <form action="{% url 'logout_seller' %}" method="post">
+  {% csrf_token %}
+<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
+<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
+</form>
+{% else %}
+<!-- If the user is not authenticated, show Login and Registration buttons -->
+<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
+<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
+{% endif %}
+
+
+{% endblock %}
+
+{% block content %}
+<div class="text-white my-3 mx-5 bg-dark pt-3">
+  <h2 class="text-center">New Item Add Form</h2>
+  <div class="mt-4 bg-dark text-white d-flex justify-content-center">
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <!-- Render the form fields dynamically -->
+      {{ form.as_p }}
+
+      <div class="d-grid gap-2">
+        <button class="btn btn-primary mb-3" type="submit">Add</button> <!-- Changed to 'submit' -->
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

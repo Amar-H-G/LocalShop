@@ -1,0 +1,31 @@
+{% extends "Header.html" %} 
+
+{% block data %}
+<div class="container  d-flex justify-content-center mt-5">
+  <div
+    class="bg-dark text-primary d-flex flex-column justify-content-center py-3 px-4"
+  >
+    <h2 class="pb-3 text-center">Login Form</h2>
+    {% if messages %}
+  <div class="alert alert-info">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label for="">Username</label>
+      <input type="text" name="username" id="username" placeholder="Enter Your Username">
+      <br><br>
+      <label for="">Password</label>
+      <input type="Password" name="pass1" id="pass1" placeholder="Enter Your Password">
+      <br><br>
+      <button class="btn btn-primary">Login</button>
+    </form>
+    <p>
+      Don't Have an Account? <a href="{% url 'register' %}">Register Here</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

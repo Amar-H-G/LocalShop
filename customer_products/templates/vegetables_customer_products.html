@@ -1,0 +1,36 @@
+{% extends "Header.html" %}
+
+{% block data %}
+<h1 class="text-center mt-4">Welcome to Vegetables Products</h1>
+
+
+<div class="container row gap-3 mx-5 my-5">
+   {% for item in products %}
+   <div class="card" style="width: 18rem;">
+    <img src="{{ item.product_photo.url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h6 class="card-title">Products Name: {{item.name}}</h6>
+      <h6 class="card-text">Price_per_Kg: {{item.price_per_unit}}</h6>
+      <p class="card-text">Category: {{item.category}}</p>
+      <p class="card-text">Quantity Available: {{item.quantity_available}}</p>
+      <p class="card-text">About: {{item.description}}</p>
+      <p class="card-text">Delivery: {{item.delivery}}</p>
+      <div class="d-grid gap-2 d-md-flex justify-content-center">
+        <form method="POST" action="{% url 'add_to_whishlist' user_id=user_id username=username model_name='vegetables' item_id=item.id %}">
+          {% csrf_token %}
+          <div class="d-grid gap-2 d-md-flex justify-content-center">
+            <button class="btn btn-primary" type="submit">Add to Whishlist</button>
+          </div>
+        </form>
+        <form method="POST" action="{% url 'add_to_bag' user_id=user_id username=username model_name='vegetables' item_id=item.id %}">
+          {% csrf_token %}
+          <div class="d-grid gap-2 d-md-flex justify-content-center">
+            <button class="btn btn-primary" type="submit">Add to Bag</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+   {% endfor %}
+</div>
+{% endblock %}

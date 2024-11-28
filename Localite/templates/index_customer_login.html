@@ -1,0 +1,191 @@
+{% extends "Header.html" %}
+
+{% block data %}
+{% if messages %}
+  <div class="alert alert-info">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+        <div class="heading p-3">
+          <h1
+            title="HyperText Markup Language"
+            class="text-center py-5 text-capitalize text-Warning f-2 f-md-4"
+          >
+            what you want to buy
+          </h1>
+        </div>
+
+        <div class="contain my-8">
+          <div
+            class="row row-col-1 row-cols-md-2 row-cols-lg-4 g-1 g-md-2 g-lg-3"
+          >
+          
+
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (6).jpeg"
+                    class="card-img-top rounded float-start"
+                    alt="..."
+                  />
+                <a href="{% url 'drinks_shop' user_id=user_id username=username %}" class="btn btn-secondary btn-lg mt-2" role="button">Drinks</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (3).jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  /><a
+                    href="{% url 'electronics_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Electronics</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (7).jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  /><a
+                    href="{% url 'foods_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Food</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (1).jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  /><a
+                    href="{% url 'fruits_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Fruits</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download1.jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  />
+                  <a
+                    href="{% url 'grocery_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Grocery</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (4).jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  /><a
+                    href="{% url 'house_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >House Component</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (5).jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  /><a
+                    href="{% url 'icecream_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >IceCream</a
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (2).jpeg"
+                    class="card-img-top"
+                    alt="..."
+                  /><a
+                    href="{% url 'vegetables_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Vegetables</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (8).jpeg"
+                    class="card-img-top rounded float-start"
+                    alt="..."
+                  />
+                  <a
+                    href="{% url 'clothes_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Clothes</a
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="col d-flex justify-content-center">
+              <div class="p-3 border bg-light">
+                <div class="card" style="width: 18rem">
+                  <img
+                    src="/static/images/download (9).jpeg"
+                    class="card-img-top rounded float-start"
+                    alt="..."
+                  />
+                  <a
+                    href="{% url 'meat_shop' user_id=user_id username=username %}"
+                    class="btn btn-secondary btn-lg mt-2"
+                    role="button"
+                    >Meat</a
+                  >
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+    {% endblock %}
