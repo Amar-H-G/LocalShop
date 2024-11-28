@@ -87,6 +87,7 @@ def meat_shop(request, user_id, username):
 
 
 
+#Items Added into the Bag
 
 def add_to_bag(request, username, user_id, model_name, item_id):
     # Fetch the customer object (user)
@@ -152,7 +153,7 @@ def add_to_bag(request, username, user_id, model_name, item_id):
         # After saving, you can either redirect to the same page or to another page (like the shopping bag)
         return redirect(request.META.get('HTTP_REFERER'))  # Redirect back to the page where the form was submitted
 
-
+ # Show items into the htms page
 
 def view_customer_bag(request, user_id,username):
     # Get the customer (user) object
@@ -164,7 +165,7 @@ def view_customer_bag(request, user_id,username):
     # Pass the bag items to the template
     return render(request, 'bag&whishlist/bag.html', {'bag_items': bag_items,'user_id': user_id, 'username': username})
 
-
+#delete items from bag and whishlist
 def delete_item_from_bag(request, user_id, order_id):
     # Get the customer (user) object
     user = get_object_or_404(CustomerRegistrationModel, customer_id=user_id)
@@ -257,6 +258,7 @@ def add_to_whishlist(request, username, user_id, model_name, item_id):
         # After saving, you can either redirect to the same page or to another page (like the shopping bag)
         return redirect(request.META.get('HTTP_REFERER'))  # Redirect back to the page where the form was submitted
 
+# Show items into the htms page
 
 def view_customer_whishlist(request, user_id,username):
     # Get the customer (user) object
