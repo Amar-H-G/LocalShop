@@ -1,0 +1,45 @@
+{% extends "Header.html" %} 
+{% block data %}
+<div class="container d-flex justify-content-center mt-5">
+  <div class="bg-dark text-light d-flex flex-column justify-content-center py-3 px-4">
+    <h2>Registration Form</h2>
+    {% if messages %}
+  <div class="alert alert-info">
+    {% for message in messages %}
+      <p>{{ message }}</p>
+    {% endfor %}
+  </div>
+{% endif %}
+    <form method="post" class="bg-dark">
+      {% csrf_token %}
+      <label for="username">Username</label>
+      <input type="text" name="username" placeholder="Create a Username" required>
+      <br><br>
+      <label for="firstname">Firstname</label>
+      <input type="text" name="firstname" placeholder="Enter Your Full Name" required>
+      <br><br>
+      <label for="lastname">Lastname</label>
+      <input type="text" name="lastname" placeholder="Enter Your Full Name" required>
+      <br><br>
+      <label for="email">Email</label>
+      <input type="email" name="email" placeholder="Enter Your Email" required>
+      <br><br>
+      <label for="pass1">Password</label>
+      <input type="password" name="pass1" placeholder="Create a Password" required>
+      <br><br>
+      <label for="pass2">Confirm Password</label>
+      <input type="password" name="pass2" placeholder="Confirm your Password" required>
+      <br><br>
+      <label for="city">City</label>
+      <input type="text" name="city" placeholder="Please enter your city name" required>
+      <br><br>
+      <label for="zip">Zip</label>
+      <input type="text" name="zip" placeholder="Please enter your Zip Code" required>
+      <br><br>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary mx-auto">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

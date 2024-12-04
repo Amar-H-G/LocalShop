@@ -1,0 +1,28 @@
+{% extends "Header.html" %} {% block data %}
+<h1 class="text-center mt-4">Welcome to Bag</h1>
+<div class="container-disk d-flex justify-content-center">
+<div class="container row gap-3 mx-5 my-5">
+  {% for items in bag_items %}
+  <div class="card mb-3" style="max-width: 540px">
+    <div class="row g-0">
+      <div class="col-md-4 mt-1">
+        <img src="{{ items.product_photo.url }}" class="img-fluid rounded-start" alt="..." />
+      </div>
+      <div class="col-md-8">
+        <a href="{% url 'delete_item_from_bag' user_id=user_id order_id=items.order_id %}" class="text-decoration-none text-reset"><p class="fs-4 text-end">X</p> </a>
+        <div class="card-body">
+          <h5 class="card-title">Product Name: {{items.product_name}}</h5>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Product Price: {{items.price}}</h5>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button class="btn btn-primary mb-3" type="button">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</div>
+{% endblock %}

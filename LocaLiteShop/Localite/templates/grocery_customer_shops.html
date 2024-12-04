@@ -1,0 +1,21 @@
+{% extends "Header.html" %}
+
+{% block data %}
+<h1 class="text-center mt-4">Welcome to Grocery Shop</h1>
+
+
+<div class="container row gap-3 mx-5 my-5">
+   {% for shops in sellers %}
+   <div class="card" style="width: 18rem;">
+    <img src="{{ shops.shop_Image.url }}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h6 class="card-title">Shop Name: {{shops.shop_name}}</h6>
+      <p class="card-text">Seller Name: {{shops.seller_name}}</p>
+      <p class="card-text">Opening Hours: {{shops.opening_hours}}</p>
+      <p class="card-text">Address: {{shops.address}}</p>
+      <a href="{% url 'grocery_customer_views' seller_id=shops.seller_id user_id=user_id username=username %}" class="btn btn-primary">Go & Shop Now</a>
+    </div>
+  </div>
+   {% endfor %}
+</div>
+{% endblock %}

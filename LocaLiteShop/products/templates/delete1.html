@@ -1,0 +1,28 @@
+{% extends "header_app.html" %}
+{% block loginSeller %}
+
+{% if request.session.seller_id %}
+<!-- If the user is authenticated, show a Logout button -->
+ <form action="{% url 'logout_seller' %}" method="post">
+  {% csrf_token %}
+<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
+<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
+</form>
+{% else %}
+<!-- If the user is not authenticated, show Login and Registration buttons -->
+<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
+<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
+{% endif %}
+
+
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center mt-4 text-warning">Are you sure want to delete item ?</h1>
+<form method="post">
+  {% csrf_token %}
+  <div class="container d-flex justify-content-center">
+    <button class="btn btn-danger mt-5">Delete</button>
+  </div>
+</form>
+{% endblock %}
