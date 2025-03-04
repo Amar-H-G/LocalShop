@@ -1,23 +1,39 @@
-{% extends "header.html" %}
+{% extends "Header.html" %}
 {% block name %}Home Page{% endblock %}
-    {% block data %}
-    <div class="container-fluid">
-        <div class="container">
-            <div class="heading">
-                <h1 class="text-center py-5 text-capitalize fw-5 f-2 f-md-4">Welcome to LocaLite Shop</h1>
-            </div>
-            <div class="who">
-                <h3 class="text-capitalize text-center">Who are you ?</h3>
-            </div>
-            <div class="iam mt-5">
-                <div class="i">
-                    <h2 class="text-center">I am a </h2>
-                </div>
-                <div class="button row-col-lg-6 row-col-6 gap-4 text-center">
-                    <a class="btn btn-success mx-2" href="{% url 'Index' %}" role="button">CUSTOMER</a>
-                    <a class="btn btn-primary  mx-2" href="{% url 'login_seller' %}" role="button">SELLER</a>
-                </div>
-            </div>
-        </div>
+{% block data %}
+<div style="max-width: 100%; margin: 0; padding: 20px; box-sizing: border-box; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; background: radial-gradient(circle, #e0f7fa, #80deea);">
+  <div style="text-align: center;">
+    <h1 style="font-size: 2.5rem; color: #333; margin-bottom: 20px; text-transform: capitalize; font-weight: bold; word-wrap: break-word; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);">
+      Welcome to LocaLite Shop
+    </h1>
+    <h3 style="font-size: 1.3rem; color: #555; margin-bottom: 30px;">Who are you?</h3>
+  </div>
+
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+    <h2 style="font-size: 1.8rem; color: #444;">I am a</h2>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;">
+      <a 
+        style="text-decoration: none; padding: 15px 30px; font-size: 1.2rem; color: #fff; background: #28a745; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        href="{% url 'Index' %}" 
+        role="button"
+        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0, 0, 0, 0.2)';"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.1)';">
+        CUSTOMER
+      </a>
+      
+      <a 
+        style="text-decoration: none; padding: 15px 30px; font-size: 1.2rem; color: #fff; background: #007bff; border-radius: 10px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease;"
+        href="{% url 'login_seller' %}" 
+        role="button"
+        onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(0, 0, 0, 0.2)';"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 5px 15px rgba(0, 0, 0, 0.1)';">
+        SELLER
+      </a>
     </div>
-    {% endblock %}
+  </div>
+
+  <div style="margin-top: 40px; text-align: center;">
+    <p style="color: #666; font-size: 1rem;">Empowering local businesses and customers to connect seamlessly.</p>
+  </div>
+</div>
+{% endblock %}

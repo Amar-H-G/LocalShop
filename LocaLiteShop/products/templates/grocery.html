@@ -30,7 +30,7 @@
     <img src="{{ item.product_photo.url }}" class="card-img-top" alt="...">
     <div class="card-body">
       <h6 class="card-title">Product Name: {{item.name}}</h6>
-      <p class="card-text">Product Price: {{item.price}}</p>
+      <p class="card-text">Product Price: {{item.price}}Kg</p>
       <p class="card-text">Delivery: {{item.delivery}}</p>
       <a href="{% url 'item_delete_view' item.id %}" class="btn btn-primary">Delete</a>
     </div>
