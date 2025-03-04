@@ -1,4 +1,40 @@
-{% extends "header_app.html" %}
-{% block content %}
-<h2>This is an Error Page</h2>
+{% extends "header_app.html" %} {% block content %}
+<style>
+  .error-container {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+  .error-code {
+    font-size: 120px;
+    font-weight: bold;
+    color: #ff6b6b;
+  }
+  .error-message {
+    font-size: 24px;
+    color: #6c757d;
+  }
+  .btn-home {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  .btn-home:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<div class="error-container">
+  <div class="error-code">404</div>
+  <div class="error-message">Oops! Page Not Found</div>
+  <a href="{% url 'home' %}" class="btn-home">Go to Homepage</a>
+</div>
 {% endblock %}

@@ -1,17 +1,75 @@
-{% extends "header_app.html" %}
+{% extends "header_app.html" %} {% block content %}
 
+<div class="container d-flex justify-content-center mt-5">
+  <div
+    class="bg-dark text-light d-flex flex-column justify-content-center py-4 px-5 shadow-lg rounded"
+    style="max-width: 800px; width: 100%"
+  >
+    <h2 class="pb-3 text-center text-info">New Seller Registration</h2>
 
-{% block content %} 
-<div class="text-white my-3 mx-5 bg-dark pt-3">
-<h2 class="text-center">New Seller Registration Form</h2>
-<div class="mt-4 bg-dark text-white d-flex justify-content-center">
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <div class="d-grid gap-2 col-6 mx-auto pb-3">
-   <button class="btn btn-primary d-grid gap-2 col-6 mx-auto" type="submit">Register</button>
+    {% if messages %}
+    <div class="alert alert-info">
+      {% for message in messages %}
+      <p>{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="row g-3">
+      {% csrf_token %} {{ form.non_field_errors }} {% for field in form %}
+      <div class="mb-3">
+        <label for="id_{{ field.name }}" class="form-label">{{ field.label }}</label>
+
+        {% if field.name == 'password' %}
+        <input
+          type="password"
+          class="form-control"
+          id="id_password"
+          name="password"
+          placeholder="Enter your password"
+        />
+        {% elif field.name == 'shop_Image' %}
+        <input
+          type="file"
+          class="form-control"
+          id="id_shop_Image"
+          name="shop_Image"
+        />
+        {% elif field.name == 'shop_type' %}
+        <select class="form-select" id="id_shop_type" name="shop_type">
+          <option value="" disabled selected>Select Shop Type</option>
+          <option value="drink_shop">Drink Shop</option>
+          <option value="electronics_shop">Electronics Shop</option>
+          <option value="fruit_shop">Fruit Shop</option>
+          <option value="food_shop">Food Shop</option>
+          <option value="grocery_shop">Grocery Shop</option>
+          <option value="house_component_shop">House Component Shop</option>
+          <option value="icecream_shop">Ice Cream Shop</option>
+          <option value="clothes_shop">Clothes Shop</option>
+          <option value="vegetable_shop">Vegetable Shop</option>
+          <option value="meat_shop">Meat Shop</option>
+        </select>
+        {% else %}
+        <input
+          type="text"
+          class="form-control"
+          id="id_{{ field.name }}"
+          name="{{ field.name }}"
+          placeholder="Enter your {{ field.label|lower }}"
+        />
+        {% endif %}
+
+        <div class="text-danger">{{ field.errors }}</div>
+      </div>
+      {% endfor %}
+
+      <div class="col-12 d-grid">
+        <button class="btn btn-info w-100 py-2 rounded-pill" type="submit">
+          Register
+        </button>
+      </div>
+    </form>
   </div>
-</form>
 </div>
-</div>
+
 {% endblock %}

@@ -1,43 +1,52 @@
 {% extends "Header.html" %} 
 {% block data %}
+
 <div class="container d-flex justify-content-center mt-5">
-  <div class="bg-dark text-light d-flex flex-column justify-content-center py-3 px-4">
-    <h2>Registration Form</h2>
+  <div class="bg-dark text-light d-flex flex-column justify-content-center py-4 px-5 shadow-lg rounded" style="max-width: 600px; width: 100%;">
+    <h2 class="pb-3 text-center text-info">Registration Form</h2>
     {% if messages %}
-  <div class="alert alert-info">
-    {% for message in messages %}
+    <div class="alert alert-info">
+      {% for message in messages %}
       <p>{{ message }}</p>
-    {% endfor %}
-  </div>
-{% endif %}
-    <form method="post" class="bg-dark">
+      {% endfor %}
+    </div>
+    {% endif %}
+    <form method="post" class="d-flex flex-column gap-3">
       {% csrf_token %}
-      <label for="username">Username</label>
-      <input type="text" name="username" placeholder="Create a Username" required>
-      <br><br>
-      <label for="firstname">Firstname</label>
-      <input type="text" name="firstname" placeholder="Enter Your Full Name" required>
-      <br><br>
-      <label for="lastname">Lastname</label>
-      <input type="text" name="lastname" placeholder="Enter Your Full Name" required>
-      <br><br>
-      <label for="email">Email</label>
-      <input type="email" name="email" placeholder="Enter Your Email" required>
-      <br><br>
-      <label for="pass1">Password</label>
-      <input type="password" name="pass1" placeholder="Create a Password" required>
-      <br><br>
-      <label for="pass2">Confirm Password</label>
-      <input type="password" name="pass2" placeholder="Confirm your Password" required>
-      <br><br>
-      <label for="city">City</label>
-      <input type="text" name="city" placeholder="Please enter your city name" required>
-      <br><br>
-      <label for="zip">Zip</label>
-      <input type="text" name="zip" placeholder="Please enter your Zip Code" required>
-      <br><br>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="submit" class="btn btn-primary mx-auto">Register</button>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" name="username" class="form-control rounded-pill" placeholder="Create a Username" required>
+      </div>
+      <div class="mb-3">
+        <label for="firstname" class="form-label">Firstname</label>
+        <input type="text" name="firstname" class="form-control rounded-pill" placeholder="Enter Your First Name" required>
+      </div>
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Lastname</label>
+        <input type="text" name="lastname" class="form-control rounded-pill" placeholder="Enter Your Last Name" required>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control rounded-pill" placeholder="Enter Your Email" required>
+      </div>
+      <div class="mb-3">
+        <label for="pass1" class="form-label">Password</label>
+        <input type="password" name="pass1" class="form-control rounded-pill" placeholder="Create a Password" required>
+      </div>
+      <div class="mb-3">
+        <label for="pass2" class="form-label">Confirm Password</label>
+        <input type="password" name="pass2" class="form-control rounded-pill" placeholder="Confirm your Password" required>
+      </div>
+      <div class="mb-3">
+        <label for="city" class="form-label">City</label>
+        <input type="text" name="city" class="form-control rounded-pill" placeholder="Please enter your city name" required>
+      </div>
+      <div class="mb-3">
+        <label for="zip" class="form-label">Zip</label>
+        <input type="text" name="zip" class="form-control rounded-pill" placeholder="Please enter your Zip Code" required>
+      </div>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-info w-100 py-2 rounded-pill">Register</button>
       </div>
     </form>
   </div>

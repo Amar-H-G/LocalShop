@@ -83,7 +83,7 @@
           {% if request.session.seller_id %}
           <form action="{% url 'logout_seller' %}" method="post" class="d-flex">
             {% csrf_token %}
-            <span class="text-uppercase me-3 fw-bold text-primary"
+            <span class="text-uppercase me-3 fw-bold text-white"
               >Welcome, {{ seller_name }}!</span
             >
             <button class="btn btn-danger btn-custom me-2" type="submit">
