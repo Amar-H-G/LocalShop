@@ -1,21 +1,76 @@
-{% extends "Header.html" %}
+{% extends "Header.html" %} {% block data %}
+<h1 class="text-center mt-4 mb-4">Welcome to Foods Shop</h1>
 
-{% block data %}
-<h1 class="text-center mt-4">Welcome to Foods Shop</h1>
-
-
-<div class="container row gap-3 mx-5 my-5">
-   {% for shops in sellers %}
-   <div class="card" style="width: 18rem;">
-    <img src="{{ shops.shop_Image.url }}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h6 class="card-title">Shop Name: {{shops.shop_name}}</h6>
-      <p class="card-text">Seller Name: {{shops.seller_name}}</p>
-      <p class="card-text">Opening Hours: {{shops.opening_hours}}</p>
-      <p class="card-text">Address: {{shops.address}}</p>
-      <a href="{% url 'foods_customer_views' seller_id=shops.seller_id user_id=user_id username=username %}" class="btn btn-primary">Go & Shop Now</a>
+<div class="container d-flex flex-wrap justify-content-center gap-4 px-3 py-4">
+  {% for shops in sellers %}
+  <div class="card shadow-sm" style="max-width: 350px">
+    <img
+      src="{{ shops.shop_Image.url }}"
+      class="card-img-top"
+      alt="Shop Image"
+      style="height: 200px; object-fit: cover; width: 100%"
+    />
+    <div class="card-body d-flex flex-column justify-content-between">
+      <h5 class="card-title fw-bold">{{shops.shop_name}}</h5>
+      <p class="card-text">
+        <i class="bi bi-person"></i> Seller: {{shops.seller_name}}
+      </p>
+      <p class="card-text">
+        <i class="bi bi-clock"></i> Hours: {{shops.opening_hours}}
+      </p>
+      <p class="card-text">
+        <i class="bi bi-geo-alt"></i> Address: {{shops.address}}
+      </p>
+      <a
+        href="{% url 'foods_customer_views' seller_id=shops.seller_id user_id=user_id username=username %}"
+        class="btn btn-primary w-100"
+        >Go & Shop Now</a
+      >
     </div>
   </div>
-   {% endfor %}
+  {% endfor %}
 </div>
+
+<style>
+  body {
+    background: linear-gradient(to right, #ffecd2, #fcb69f);
+  }
+
+  h1 {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+  }
+
+  .card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-primary {
+    background-color: #ff7f50;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #ff6347;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(255, 99, 71, 0.3);
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+</style>
+
 {% endblock %}
