@@ -1,28 +1,102 @@
 {% extends "Header.html" %} {% block data %}
+<style>
+  .container-disk {
+    padding: 20px;
+    background-color: #f8f9fa;
+  }
+
+  .card {
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    max-width: 400px;
+  }
+
+  .card:hover {
+    transform: scale(1.02);
+  }
+
+  .card img {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    object-fit: cover;
+    height: 100%;
+  }
+
+  .buy-now-btn {
+    background-color: #007bff;
+    border: none;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+
+  .buy-now-btn:hover {
+    background-color: #0056b3;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      max-width: 95%;
+      margin: auto;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px;
+    }
+    .card img {
+      height: 120px;
+      width: 120px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .card-body {
+      padding: 10px;
+      font-size: 14px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .buy-now-btn {
+      font-size: 14px;
+      padding: 5px 10px;
+    }
+  }
+</style>
+
 <h1 class="text-center mt-4">Welcome to Bag</h1>
 <div class="container-disk d-flex justify-content-center">
-<div class="container row gap-3 mx-5 my-5">
-  {% for items in bag_items %}
-  <div class="card mb-3" style="max-width: 540px">
-    <div class="row g-0">
-      <div class="col-md-4 mt-1">
-        <img src="{{ items.product_photo.url }}" class="img-fluid rounded-start" alt="..." />
-      </div>
-      <div class="col-md-8">
-        <a href="{% url 'delete_item_from_bag' user_id=user_id order_id=items.order_id %}" class="text-decoration-none text-reset"><p class="fs-4 text-end">X</p> </a>
-        <div class="card-body">
-          <h5 class="card-title">Product Name: {{items.product_name}}</h5>
+  <div class="container row gap-3 mx-5 my-5 d-flex justify-content-center">
+    {% for items in bag_items %}
+    <div class="card mb-3 col-md-6 col-lg-5 col-sm-12">
+      <div class="row g-0 align-items-center">
+        <div class="col-md-4 col-4 text-center">
+          <img
+            src="{{ items.product_photo.url }}"
+            class="img-fluid"
+            alt="Product Image"
+          />
         </div>
-        <div class="card-body">
-          <h5 class="card-title">Product Price: {{items.price}}</h5>
-        </div>
-        <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary mb-3" type="button">Buy Now</button>
+        <div class="col-md-8 col-8 d-flex flex-column justify-content-between">
+          <div class="d-flex justify-content-end">
+            <a
+              href="{% url 'delete_item_from_bag' user_id=user_id order_id=items.order_id %}"
+              class="text-decoration-none text-reset"
+            >
+              <p class="fs-4 text-danger">&times;</p>
+            </a>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ items.product_name }}</h5>
+            <h5 class="card-title">₹{{ items.price }}</h5>
+          </div>
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button class="btn buy-now-btn mb-2" type="button">Buy Now</button>
+          </div>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 </div>
 {% endblock %}
