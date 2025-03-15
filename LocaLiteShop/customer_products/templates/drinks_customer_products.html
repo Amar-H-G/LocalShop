@@ -1,38 +1,86 @@
 {% extends "Header.html" %}
 
 {% block data %}
-<h1 class="text-center mt-4">Welcome to Drinks Products</h1>
+<h1 class="text-center mt-4 mb-4">Welcome to Drinks Products</h1>
 
+<div class="container">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+    {% for item in products %}
+    <div class="col">
+      <div class="card h-100 shadow-lg" style="border-radius: 20px; overflow: hidden; background: #ffffff; display: flex; flex-direction: column;">
+        <img src="{{ item.product_photo.url }}" class="card-img-top" alt="Product Image" style="height: 250px; object-fit: cover; width: 100%;">
 
-<div class="container row gap-3 mx-5 my-5">
-   {% for item in products %}
-   <div class="card" style="width: 18rem;">
-    <img src="{{ item.product_photo.url }}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h6 class="card-title">Products Name: {{item.name}}</h6>
-      <h6 class="card-text">Price: {{item.price}}</h6>
-      <p class="card-text">Ingredients: {{item.ingredients}}</p>
-      <p class="card-text">Types: {{item.drink_Type}}</p>
-      <p class="card-text">Variety: {{item.variety}}</p>
-      <p class="card-text">Quantity: {{item.quantity}}</p>
-      <p class="card-text">Stock: {{item.stock}}</p>
-      <p class="card-text">Delivery: {{item.delivery}}</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-center">
-        <form method="POST" action="{% url 'add_to_whishlist' user_id=user_id username=username model_name='drinks' item_id=item.id %}">
-          {% csrf_token %}
-          <div class="d-grid gap-2 d-md-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Add to Whishlist</button>
+        <div class="card-body text-dark d-flex flex-column" style="flex-grow: 1;">
+          <h5 class="card-title fw-bold" style="color: #007bff;">{{ item.name }}</h5>
+          <h6 class="card-text"><strong>Price:</strong> <span class="text-success">${{ item.price }}</span></h6>
+          <p class="card-text"><strong>Quantity:</strong> {{ item.quantity }}</p>
+          <p class="card-text"><strong>Delivery:</strong> {{ item.delivery }}</p>
+
+          <div class="mt-auto d-flex justify-content-around mt-4 gap-3">
+            <form method="POST" action="{% url 'add_to_whishlist' user_id=user_id username=username model_name='drinks' item_id=item.id %}">
+              {% csrf_token %}
+              <button class="btn btn-outline-danger" style="border-radius: 10px; padding: 10px 20px; min-width: 120px;" type="submit">Add to Wishlist</button>
+            </form>
+            <form method="POST" action="{% url 'add_to_bag' user_id=user_id username=username model_name='drinks' item_id=item.id %}">
+              {% csrf_token %}
+              <button class="btn btn-outline-success" style="border-radius: 10px; padding: 10px 20px; min-width: 120px;" type="submit">Add to Bag</button>
+            </form>
           </div>
-        </form>
-        <form method="POST" action="{% url 'add_to_bag' user_id=user_id username=username model_name='drinks' item_id=item.id %}">
-          {% csrf_token %}
-          <div class="d-grid gap-2 d-md-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Add to Bag</button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-   {% endfor %}
 </div>
+
 {% endblock %}
+
+<style>
+  body {
+    background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  }
+
+  .card {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-title {
+    font-size: 1.3rem;
+  }
+
+  .card-text {
+    font-size: 1rem;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+  }
+
+  .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .btn {
+    white-space: nowrap;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      width: 100%;
+    }
+
+    .btn {
+      padding: 8px 10px;
+      font-size: 0.9rem;
+    }
+  }
+</style>

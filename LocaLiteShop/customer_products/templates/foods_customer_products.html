@@ -3,33 +3,98 @@
 {% block data %}
 <h1 class="text-center mt-4">Welcome to Foods Products</h1>
 
-
-<div class="container row gap-3 mx-5 my-5">
+<div class="container d-flex flex-wrap justify-content-center gap-4 px-3 py-4">
    {% for item in products %}
-   <div class="card" style="width: 18rem;">
-    <img src="{{ item.product_photo.url }}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h6 class="card-title">Products Name: {{item.name}}</h6>
-      <h6 class="card-text">Price: {{item.price}}</h6>
+   <div class="card shadow-sm" style="max-width: 350px">
+    <img src="{{ item.product_photo.url }}" class="card-img-top" alt="Product Image" style="height: 200px; object-fit: cover; width: 100%">
+    <div class="card-body d-flex flex-column justify-content-between">
+      <h5 class="card-title fw-bold">Products Name: {{item.name}}</h5>
+      <p class="card-text">Price: {{item.price}}</p>
       <p class="card-text">Nutrations: {{item.Nutrations}}</p>
       <p class="card-text">Packaging: {{item.packaging}}</p>
       <p class="card-text">Delivery: {{item.delivery}}</p>
       <div class="d-grid gap-2 d-md-flex justify-content-center">
         <form method="POST" action="{% url 'add_to_whishlist' user_id=user_id username=username model_name='foods' item_id=item.id %}">
           {% csrf_token %}
-          <div class="d-grid gap-2 d-md-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Add to Whishlist</button>
-          </div>
+          <button class="btn btn-outline-danger" type="submit">Add to Wishlist</button>
         </form>
         <form method="POST" action="{% url 'add_to_bag' user_id=user_id username=username model_name='foods' item_id=item.id %}">
           {% csrf_token %}
-          <div class="d-grid gap-2 d-md-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">Add to Bag</button>
-          </div>
+          <button class="btn btn-outline-success" type="submit">Add to Bag</button>
         </form>
       </div>
     </div>
   </div>
    {% endfor %}
 </div>
+
+<style>
+  body {
+    background: linear-gradient(to right, #e3fdfd, #ffe6fa);
+  }
+
+  h1 {
+    font-family: "Poppins", sans-serif;
+    color: #333;
+  }
+
+  .card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-title {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .card-text {
+    color: #4a4a4a;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .btn-outline-danger, .btn-outline-success {
+    border-radius: 8px;
+    padding: 10px 20px;
+    min-width: 120px;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #ff6b6b;
+    color: #fff;
+  }
+
+  .btn-outline-success:hover {
+    background-color: #28a745;
+    color: #fff;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      max-width: 100%;
+    }
+    .btn {
+      padding: 8px 10px;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
 {% endblock %}
