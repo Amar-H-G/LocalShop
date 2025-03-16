@@ -1,35 +1,86 @@
-{% extends "header_app.html" %}
-
+{% extends "header_app.html" %} 
 {% block loginSeller %}
-
-{% if request.session.seller_id %}
-<!-- If the user is authenticated, show a Logout button -->
- <form action="{% url 'logout_seller' %}" method="post">
-  {% csrf_token %}
-<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
-<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
-</form>
-{% else %}
-<!-- If the user is not authenticated, show Login and Registration buttons -->
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
-{% endif %}
-
-
-{% endblock %}
+<div class="container mt-3 d-flex justify-content-end">
+  {% if request.session.seller_id %}
+  <form
+    action="{% url 'logout_seller' %}"
+    method="post"
+    class="d-flex align-items-center gap-2"
+  >
+    {% csrf_token %}
+    <button class="btn btn-danger text-uppercase" type="submit">Logout</button>
+    <span class="text-uppercase text-white fw-bold">
+      Welcome, {{ seller_name }}!
+    </span>
+  </form>
+  {% else %}
+  <div class="d-flex gap-2">
+    <a class="btn btn-primary text-uppercase" href="{% url 'login_seller' %}">Login</a>
+    <a class="btn btn-success text-uppercase" href="{% url 'register_seller' %}">Register</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %} 
 
 {% block content %}
-<div class="text-white my-3 mx-5 bg-dark pt-3">
-  <h2 class="text-center">New Item Add Form</h2>
-  <div class="mt-4 bg-dark text-white d-flex justify-content-center">
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      
-      <!-- Render the form fields dynamically -->
-      {{ form.as_p }}
+<div class="container d-flex justify-content-center mt-5">
+  <div class="bg-dark text-light shadow-lg rounded p-4" style="max-width: 800px; width: 100%;">
+    <h2 class="text-center text-info">New Item Add Form</h2>
+    <hr class="border-light mb-4" />
 
-      <div class="d-grid gap-2">
-        <button class="btn btn-primary mb-3" type="submit">Add</button> <!-- Changed to 'submit' -->
+    {% if messages %}
+    <div class="alert alert-warning">
+      {% for message in messages %}
+      <p class="mb-0">{{ message }}</p>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data" class="row g-3">
+      {% csrf_token %} 
+      
+      {% for field in form %}
+      <div class="col-12">
+        <label for="id_{{ field.name }}" class="form-label fw-bold">{{ field.label }}</label>
+
+        {% if field.widget.input_type == 'file' %}
+        <input type="file" class="form-control" id="id_{{ field.name }}" name="{{ field.name }}" />
+
+        {% elif field.field.widget.input_type == 'textarea' %}
+        <textarea 
+          class="form-control" 
+          id="id_{{ field.name }}" 
+          name="{{ field.name }}" 
+          placeholder="Enter {{ field.label|lower }}" 
+          rows="3"
+        ></textarea>
+
+        {% elif field.field.widget.input_type == 'select' %}
+        <select class="form-control" id="id_{{ field.name }}" name="{{ field.name }}">
+          {% for choice in field.field.choices %}
+          <option value="{{ choice.0 }}" {% if field.value == choice.0 %}selected{% endif %}>
+            {{ choice.1 }}
+          </option>
+          {% endfor %}
+        </select>
+
+        {% else %}
+        <input 
+          type="{{ field.field.widget.input_type }}" 
+          class="form-control" 
+          id="id_{{ field.name }}" 
+          name="{{ field.name }}" 
+          placeholder="Enter {{ field.label|lower }}" 
+          value="{{ field.value|default_if_none:'' }}"
+        />
+        {% endif %}
+
+        <div class="text-danger small">{{ field.errors }}</div>
+      </div>
+      {% endfor %}
+
+      <div class="col-12 d-grid">
+        <button class="btn btn-info w-100 py-2 rounded-pill fw-bold" type="submit">Add Item</button>
       </div>
     </form>
   </div>

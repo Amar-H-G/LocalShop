@@ -1,28 +1,38 @@
 {% extends "header_app.html" %}
+
 {% block loginSeller %}
-
-{% if request.session.seller_id %}
-<!-- If the user is authenticated, show a Logout button -->
- <form action="{% url 'logout_seller' %}" method="post">
-  {% csrf_token %}
-<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
-<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
-</form>
-{% else %}
-<!-- If the user is not authenticated, show Login and Registration buttons -->
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
-{% endif %}
-
-
+<div class="container mt-3 d-flex justify-content-end align-items-center">
+  {% if request.session.seller_id %}
+  <!-- If the user is authenticated, show a Logout button -->
+  <form action="{% url 'logout_seller' %}" method="post" class="d-flex align-items-center gap-2">
+    {% csrf_token %}
+    <button class="btn btn-danger text-uppercase fw-bold shadow-sm" type="submit">Logout</button>
+    <span class="text-uppercase text-dark fw-bold">Welcome, {{ seller_name }}!</span>
+  </form>
+  {% else %}
+  <!-- If the user is not authenticated, show Login and Registration buttons -->
+  <div class="d-flex gap-2">
+    <a class="btn btn-primary text-uppercase fw-bold shadow-sm" href="{% url 'login_seller' %}">Login</a>
+    <a class="btn btn-success text-uppercase fw-bold shadow-sm" href="{% url 'register_seller' %}">Register</a>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4 text-warning">Are you sure want to delete item ?</h1>
-<form method="post">
-  {% csrf_token %}
-  <div class="container d-flex justify-content-center">
-    <button class="btn btn-danger mt-5">Delete</button>
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+  <div class="card shadow-lg p-4 text-center border-0" style="max-width: 500px;">
+    <i class="fas fa-exclamation-triangle text-warning" style="font-size: 50px;"></i>
+    <h2 class="text-danger fw-bold mt-3">Are you sure?</h2>
+    <p class="text-muted">This action cannot be undone. You are about to delete this item permanently.</p>
+    
+    <form method="post">
+      {% csrf_token %}
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="javascript:history.back()" class="btn btn-secondary px-4 fw-bold shadow-sm">Cancel</a>
+        <button class="btn btn-danger px-4 fw-bold shadow-sm" type="submit">Delete</button>
+      </div>
+    </form>
   </div>
-</form>
+</div>
 {% endblock %}

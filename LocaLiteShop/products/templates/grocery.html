@@ -1,40 +1,71 @@
 {% extends "header_app.html" %}
 
 {% block loginSeller %}
-
-{% if request.session.seller_id %}
-<!-- If the user is authenticated, show a Logout button -->
- <form action="{% url 'logout_seller' %}" method="post">
-  {% csrf_token %}
-<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
-<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
-</form>
-{% else %}
-<!-- If the user is not authenticated, show Login and Registration buttons -->
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
-{% endif %}
-
-
+<div class="container mt-3 d-flex justify-content-end align-items-center">
+  {% if request.session.seller_id %}
+  <!-- If the user is authenticated, show a Logout button -->
+  <form action="{% url 'logout_seller' %}" method="post" class="d-flex align-items-center gap-2">
+    {% csrf_token %}
+    <button class="btn btn-danger text-uppercase fw-bold shadow" type="submit">Logout</button>
+    <span class="text-uppercase text-dark fw-bold">Welcome, {{ seller_name }}!</span>
+  </form>
+  {% else %}
+  <!-- If the user is not authenticated, show Login and Registration buttons -->
+  <div class="d-flex gap-2">
+    <a class="btn btn-primary text-uppercase fw-bold shadow" href="{% url 'login_seller' %}">Login</a>
+    <a class="btn btn-success text-uppercase fw-bold shadow" href="{% url 'register_seller' %}">Register</a>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}
 
 {% block content %}
-<h1 class="text-center mt-4">Welcome to Grocery Seller Page</h1>
-<div class="d-grid gap-2 d-flex justify-content-end mx-5">
-  <a class="btn btn-primary mb-3 " href="{% url 'item_add_view' %}">Add New Item</a>
-</div>
-
-<div class="container row gap-3 mx-5">
-   {% for item in products %}
-   <div class="card" style="width: 18rem;">
-    <img src="{{ item.product_photo.url }}" class="card-img-top" alt="...">
-    <div class="card-body">
-      <h6 class="card-title">Product Name: {{item.name}}</h6>
-      <p class="card-text">Product Price: {{item.price}}Kg</p>
-      <p class="card-text">Delivery: {{item.delivery}}</p>
-      <a href="{% url 'item_delete_view' item.id %}" class="btn btn-primary">Delete</a>
-    </div>
+<div class="container mt-5">
+  <h1 class="text-center text-warning fw-bold">Welcome to Grocery Seller Page</h1>
+  
+  <!-- Add New Item Button -->
+  <div class="d-flex justify-content-end mt-3">
+    <a class="btn btn-primary text-uppercase fw-bold shadow" href="{% url 'item_add_view' %}">
+      <i class="fas fa-plus"></i> Add New Item
+    </a>
   </div>
-   {% endfor %}
+
+  <!-- Default Products -->
+  <div class="row mt-4">
+    {% if products %}
+      {% for item in products %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+        <div class="card shadow-lg border-0 rounded-lg" style="width: 100%; max-width: 18rem;">
+          <img src="{{ item.product_photo.url }}" class="card-img-top rounded-top" alt="Product Image" style="height: 250px; object-fit: cover;">
+          <div class="card-body bg-light">
+            <h6 class="card-title fw-bold text-danger">Product: {{ item.name }}</h6>
+            <p class="mb-1"><strong>Price:</strong> ₹{{ item.price }}/Kg</p>
+            <p class="mb-2"><strong>Delivery:</strong> {{ item.delivery }}</p>
+            
+            <div class="d-grid">
+              <a href="{% url 'item_delete_view' item.id %}" class="btn btn-danger w-100 text-uppercase fw-bold">
+                <i class="fas fa-trash-alt"></i> Delete
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <!-- Default Grocery Items -->
+      {% for item in default_items %}
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center">
+        <div class="card shadow-lg border-0 rounded-lg" style="width: 100%; max-width: 18rem;">
+          <img src="{{ item.image }}" class="card-img-top rounded-top" alt="Grocery Image" style="height: 250px; object-fit: cover;">
+          <div class="card-body bg-light">
+            <h6 class="card-title fw-bold text-danger">Product: {{ item.name }}</h6>
+            <p class="mb-1"><strong>Price:</strong> ₹{{ item.price }}/Kg</p>
+            <p class="mb-2"><strong>Delivery:</strong> {{ item.delivery }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% endif %}
+  </div>
 </div>
 {% endblock %}

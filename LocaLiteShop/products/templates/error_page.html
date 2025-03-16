@@ -1,22 +1,35 @@
 {% extends "header_app.html" %}
+
 {% block loginSeller %}
-
-{% if request.session.seller_id %}
-<!-- If the user is authenticated, show a Logout button -->
- <form action="{% url 'logout_seller' %}" method="post">
-  {% csrf_token %}
-<button class="btn btn-danger text-uppercase mx-2"  type="submit">Logout</button>
-<span class="text-uppercase">Welcome, {{ seller_name }}!</span>
-</form>
-{% else %}
-<!-- If the user is not authenticated, show Login and Registration buttons -->
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'login_seller' %}" role="button">Login</a>
-<a class="btn btn-primary text-uppercase mx-2" href="{% url 'register_seller' %}" role="button">Registration</a>
-{% endif %}
-
-
+<div class="container mt-3 d-flex justify-content-end align-items-center">
+  {% if request.session.seller_id %}
+  <!-- If the user is authenticated, show a Logout button -->
+  <form action="{% url 'logout_seller' %}" method="post" class="d-flex align-items-center gap-2">
+    {% csrf_token %}
+    <button class="btn btn-danger text-uppercase fw-bold shadow-sm" type="submit">Logout</button>
+    <span class="text-uppercase text-dark fw-bold">Welcome, {{ seller_name }}!</span>
+  </form>
+  {% else %}
+  <!-- If the user is not authenticated, show Login and Registration buttons -->
+  <div class="d-flex gap-2">
+    <a class="btn btn-primary text-uppercase fw-bold shadow-sm" href="{% url 'login_seller' %}">Login</a>
+    <a class="btn btn-success text-uppercase fw-bold shadow-sm" href="{% url 'register_seller' %}">Register</a>
+  </div>
+  {% endif %}
+</div>
 {% endblock %}
 
 {% block content %}
-<h2>This is an Error Page</h2>
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+  <div class="text-center">
+    <i class="fas fa-exclamation-circle text-danger" style="font-size: 80px;"></i>
+    <h1 class="text-danger fw-bold mt-3">Oops! Something Went Wrong</h1>
+    <p class="text-muted">An unexpected error has occurred. Please try again later.</p>
+    
+    <div class="d-flex justify-content-center gap-3 mt-4">
+      <a href="javascript:history.back()" class="btn btn-secondary px-4 fw-bold shadow-sm">Go Back</a>
+      <a href="{% url 'home' %}" class="btn btn-primary px-4 fw-bold shadow-sm">Home</a>
+    </div>
+  </div>
+</div>
 {% endblock %}
